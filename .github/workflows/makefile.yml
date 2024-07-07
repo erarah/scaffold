@@ -1,0 +1,26 @@
+name: Test the Learn project
+
+on: [push]
+    
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.9.16
+    - name: Install dependencies
+      run: make install
+
+    - name: Lint with pylint
+      run: make lint
+
+    - name: Test units
+      run: make test
+
+    - name: Format code
+      run: make format
